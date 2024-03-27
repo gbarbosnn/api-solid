@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { RegisterUseCase } from './register'
+import { RegisterUseCase } from '../register'
 
 import { compare } from 'bcryptjs'
 import { InMemoryUserReporitory } from '@/repositories/in-memory/in-memory-users-repository'

@@ -1,6 +1,5 @@
-import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repositoriy'
-import { AuthenticateUseCase } from '@/use-cases/authenticate'
 import { InvalidCredintialsError } from '@/use-cases/errors/invalid-credentials-error'
+import { makeAuthenticateUsersRepository } from '@/use-cases/factories/make-authenticate-users-repository'
 
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
@@ -17,8 +16,7 @@ export async function authenticate(
     const { email, password } = authenticateBodySchema.parse(request.body)
 
     try {
-        const usersRepository = new PrismaUsersRepository()
-        const authenticateUseCase = new AuthenticateUseCase(usersRepository)
+        const authenticateUseCase = makeAuthenticateUsersRepository()
 
         await authenticateUseCase.execute({ email, password })
     } catch (error) {
